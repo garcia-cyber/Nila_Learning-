@@ -1,4 +1,4 @@
-from flask import Flask , render_template , redirect , session 
+from flask import Flask , render_template , redirect , session , request , flash
 import sqlite3 
 
 
@@ -25,9 +25,59 @@ def portfolio():
     return render_template('front/portfolio.html')    
 
 
+## 
+# cote back-end 
+#
+# 
+@app.route("/login",methods = ['GET','POST']) 
+def login():
+    if request.method == 'POST':
+        user = request.form['user']
+        pwd  = request.form['pwd'] 
+
+        with sqlite3.connect("courses.db") as con :
+            cur = con.cursor()
+            cur.execute("select * from users where fullNames = ? or phoneUser = ?  and passwordUser = ?", [user,user,pwd])
+            data = cur.fetchone()
+
+            if data:
+                session['okey'] = True 
+                session['id']  = data[0]
+                session['fullname'] = data[1] 
+                session['function'] = data[2] 
+
+                return redirect('/admin')
+            else:
+                flash("mot de passe incorrecte".capitalize())
+    return render_template('back/page-login.html')
+##
+#
+# Admin 
+#
+@app.route('/admin')
+def admin():
+    if 'okey' in session :
+        return render_template('back/index.html')
+    else:
+        return redirect('/login')
+    
+##
+#
+# deconnexion 
+#
+@app.route('/deco')
+def deco():
+    session.clear()
+    
+    return redirect('/login')
 
 
-
+##
+#
+# creation du compte 
+@app.route("/register",methods = ['POST','GET'])
+def register():
+    return render_template('back/page-register.html')
 
 if __name__ == '__main__':
     app.run(debug= True)
