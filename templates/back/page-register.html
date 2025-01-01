@@ -41,6 +41,16 @@
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 
+                                    
+
+                                    {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                            {% for i in messages %}
+                                            <div class="alert alert-warning">{{i}}</div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+
                                     <a class="text-center" href="/register"> <h4>Learning</h4></a>
         
                                 <form class="mt-5 mb-5 login-input" method="post" action="/register">

@@ -77,6 +77,20 @@ def deco():
 # creation du compte 
 @app.route("/register",methods = ['POST','GET'])
 def register():
+    if request.method == 'POST':
+        user = request.form['user']
+        pwd  = request.form['pwd']
+        pwd2 = request.form['pwd2'] 
+
+        # verification du double mot de passe 
+        if pwd == pwd2:
+            with sqlite3.connect("courses.db") as con :
+                cur = con.cursor()
+                cur.execute("insert into users(fullNames,passwordUser) values(?,?)",[user,pwd])
+                con.commit()
+                return redirect('/login')
+        else:
+            flash("les mot de passe doivent etre identique")
     return render_template('back/page-register.html')
 
 if __name__ == '__main__':
