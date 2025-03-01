@@ -79,6 +79,8 @@ def deco():
 def register():
     if request.method == 'POST':
         user = request.form['user']
+        post = request.form['postnom']  
+        phone= request.form['phone']
         pwd  = request.form['pwd']
         pwd2 = request.form['pwd2'] 
 
@@ -86,7 +88,7 @@ def register():
         if pwd == pwd2:
             with sqlite3.connect("courses.db") as con :
                 cur = con.cursor()
-                cur.execute("insert into users(fullNames,passwordUser) values(?,?)",[user,pwd])
+                cur.execute("insert into users(fullNames,passwordUser,phoneUser,postNom) values(?,?,?,?)",[user,pwd,phone,post])
                 con.commit()
                 return redirect('/login')
         else:
