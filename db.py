@@ -18,6 +18,8 @@ call.execute("""
              )
 """)
 
+# call.execute('alter table users add postNom varchar(30)')
+
 ## information par defaut 
 #call.execute("insert into users(fullNames,fuctionUser,passwordUser) values('nila','admin','nila')")
 
