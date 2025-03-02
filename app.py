@@ -94,6 +94,31 @@ def register():
         else:
             flash("les mot de passe doivent etre identique")
     return render_template('back/page-register.html')
+#
+#
+# add professeur 
+@app.route("/addP", methods = ['POST','GET'])
+def addP():
+    if request.method == 'POST':
+        name  = request.form['username']
+        fis   = request.form['prenom'] 
+        phone = request.form['phone']
+        valpassword = request.form['valpassword'] 
+        confirmpassword = request.form['valconfirmpassword'] 
+
+        if valpassword == confirmpassword:
+            with sqlite3.connect("courses.db") as con :
+                cur = con.cursor()
+                cur.execute("insert into users(fullNames,phoneUser,postNom,fuctionUser,passwordUser) values(?,?,?,?,?)", [name,phone,fis,'professeur',valpassword])
+                con.commit()
+                flash("information enregistre !!!")
+        else:
+            flash("le mot de passe doit etre conforme")
+
+
+
+
+    return render_template('back/form-validation.html')
 
 if __name__ == '__main__':
     app.run(debug= True)

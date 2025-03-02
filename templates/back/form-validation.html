@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>Add Professeur</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename = 'back/images/favicon.png')}}">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'back/css/style.css')}}" rel="stylesheet">
 
 </head>
 
@@ -243,12 +243,9 @@
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
+                       
                     </li>
-                    <li class="mega-menu mega-menu-sm">
+                    <!-- <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
                         </a>
@@ -266,7 +263,7 @@
                             <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
                             <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="nav-label">Apps</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -287,72 +284,24 @@
                             <li><a href="./app-calender.html">Calender</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">UI Components</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
-                        <!-- </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
-                        </a>
-                        <ul aria-expanded="false"> -->
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="widgets.html" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
-                        </a>
-                    </li>
+                    
+                    
+                   {% if session['function']  == 'admin' %}
                     <li class="nav-label">Forms</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
+                            <li><a href="/addP">ADD </a></li>
+                            <!-- <li><a href="./form-validation.html">Form Validation</a></li>
                             <li><a href="./form-step.html">Step Form</a></li>
                             <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
+                            <li><a href="./form-picker.html">Picker</a></li> -->
                         </ul>
                     </li>
+                    {%endif%}
+
                     <li class="nav-label">Table</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -369,18 +318,10 @@
                             <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                            <!-- <li><a href="">Lock Screen</a></li> -->
+                            
                         </ul>
                     </li>
                 </ul>
@@ -411,43 +352,56 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" action="#" method="post">
+                                    {% with messages = get_flashed_messages() %}
+                                        {% if messages %}
+                                            {% for i in messages %}
+                                            <div class="alert alert-success">{{i}}</div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endwith %}
+                                    <form class="form-valide" action="/addP" method="post">
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-username">Username <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
+                                                <input type="text" class="form-control" id="val-username" name="username" placeholder="Enter a username..">
                                             </div>
                                         </div>
+
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="val-username">firstname<span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Your valid email..">
+                                                <input type="text" class="form-control" id="val-username" name="prenom" placeholder="Enter a fistname..">
                                             </div>
                                         </div>
+
                                         <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-username">Phone<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="text" class="form-control" id="val-username" name="phone" placeholder="Enter a phone..">
+                                            </div>
+                                        </div>
+
+
+                                       
+                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-password">Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">
+                                                <input type="password" class="form-control" id="val-password" name="valpassword" placeholder="Choose a safe one..">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">
+                                                <input type="password" class="form-control" id="val-confirm-password" name="valconfirmpassword" placeholder="..and confirm it!">
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-suggestions">Suggestions <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <textarea class="form-control" id="val-suggestions" name="val-suggestions" rows="5" placeholder="What would you like to see?"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
+                                        </div> 
+                                       
+                                        <!-- <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-skill">Best Skill <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
@@ -466,15 +420,15 @@
                                                     <option value="mysql">MySQL</option>
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
+                                        </div> -->
+                                        <!-- <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-currency">Currency <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="val-currency" name="val-currency" placeholder="$21.60">
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
+                                        </div> -->
+                                        <!-- <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-website">Website <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
@@ -487,8 +441,8 @@
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="val-phoneus" name="val-phoneus" placeholder="212-999-0000">
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
+                                        </div> -->
+                                        <!-- <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-digits">Digits <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
@@ -501,8 +455,8 @@
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="val-number" name="val-number" placeholder="5.0">
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
+                                        </div> -->
+                                        <!-- <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="val-range">Range [1, 5] <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
@@ -516,7 +470,7 @@
                                                 <label class="css-control css-control-primary css-checkbox" for="val-terms">
                                                     <input type="checkbox" class="css-control-input" id="val-terms" name="val-terms" value="1"> <span class="css-control-indicator"></span> I agree to the terms</label>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -555,14 +509,14 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="{{url_for('static', filename = 'back/plugins/common/common.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'back/js/custom.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'back/js/settings.js')}}"></script>
+    <script src="{{url_for('static', filename = 'back/js/gleek.js')}}"></script>
+    <script src="{{url_for('static', filename = 'back/js/styleSwitcher.js')}}"></script>
 
-    <script src="./plugins/validation/jquery.validate.min.js"></script>
-    <script src="./plugins/validation/jquery.validate-init.js"></script>
+    <script src="{{url_for('static', filename = 'back//plugins/validation/jquery.validate.min.js')}}"></script>
+    <script src="{{url_for('static', filename = 'back//plugins/validation/jquery.validate-init.js')}}"></script>
 
 </body>
 
