@@ -75,12 +75,13 @@ def deco():
 ##
 #
 # creation du compte 
-@app.route("/register",methods = ['POST','GET'])
+@app.route("/register",methods = ['POST','GET']) 
 def register():
     if request.method == 'POST':
         user = request.form['user']
         post = request.form['postnom']  
         phone= request.form['phone']
+        role = request.form['role']
         pwd  = request.form['pwd']
         pwd2 = request.form['pwd2'] 
 
@@ -88,7 +89,7 @@ def register():
         if pwd == pwd2:
             with sqlite3.connect("courses.db") as con :
                 cur = con.cursor()
-                cur.execute("insert into users(fullNames,passwordUser,phoneUser,postNom) values(?,?,?,?)",[user,pwd,phone,post])
+                cur.execute("insert into users(fullNames,passwordUser,phoneUser,postNom, fuctionUser) values(?,?,?,?,?)",[user,pwd,phone,post,role])
                 con.commit()
                 return redirect('/login')
         else:

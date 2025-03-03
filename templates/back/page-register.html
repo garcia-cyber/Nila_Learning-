@@ -51,7 +51,7 @@
                                         {% endif %}
                                     {% endwith %}
 
-                                    <a class="text-center" href="/register"> <h4>Create compte</h4></a>
+                                    <a class="text-center" href="/register"> <h4>Nouveau compte</h4></a>
         
                                 <form class="mt-5 mb-5 login-input" method="post" action="/register">
                                     <div class="form-group">
@@ -60,6 +60,17 @@
 
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="postnom"  placeholder="postNom" required>
+                                    </div>
+
+                                    <!-- ajout du choix  -->
+
+                                    <div class="form-group">
+                                        <label>Role</label>
+                                        <select  class="form-control" id="sel2" name="role">
+                                            <option value="student">etudiant</option>
+                                            <option value="professeur">professeur</option>
+                                            
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
