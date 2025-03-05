@@ -1,39 +1,21 @@
 <div class="nk-sidebar">           
     <div class="nk-nav-scroll">
         <ul class="metismenu" id="menu">
-            <li class="nav-label">Dashboard</li>
+            <li class="nav-label">Accueil</li>
             <li>
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                <a class="has-arrow" href="/" aria-expanded="false">
+                    <i class="icon-speedometer menu-icon"></i><span class="nav-text">Accueil</span>
                 </a>
                
             </li>
-            <!-- <li class="mega-menu mega-menu-sm">
-                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                    <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="./layout-blank.html">Blank</a></li>
-                    <li><a href="./layout-one-column.html">One Column</a></li>
-                    <li><a href="./layout-two-column.html">Two column</a></li>
-                    <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                    <li><a href="./layout-vertical.html">Vertical</a></li>
-                    <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                    <li><a href="./layout-boxed.html">Boxed</a></li>
-                    <li><a href="./layout-wide.html">Wide</a></li>
-                    
-                    
-                    <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                    <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                </ul>
-            </li> -->
+            
             <li class="nav-label">Apps</li>
             <li>
                 <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                     <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="./email-inbox.html">Inbox</a></li>
+                    <li><a href="/message">Messagerie</a></li>
                     <li><a href="./email-read.html">Read</a></li>
                     <li><a href="./email-compose.html">Compose</a></li>
                 </ul>
@@ -56,7 +38,8 @@
                     <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="/addP">ADD </a></li>
+                    <!-- <li><a href="/addP">ADD </a></li> -->
+                    <li><a href="/module">ajouter mobule</a></li>
                     <!-- <li><a href="./form-validation.html">Form Validation</a></li>
                     <li><a href="./form-step.html">Step Form</a></li>
                     <li><a href="./form-editor.html">Editor</a></li>
@@ -72,9 +55,9 @@
                 </a>
                 <ul aria-expanded="false">
                     {% if session['function'] == 'admin'%}
-                    <li><a href="/listeAll" aria-expanded="false">liste des utilisateurs</a></li>
-                    {% endif %}
-                    <li><a href="" aria-expanded="false">Data Table</a></li>
+                    <li><a href="listM" aria-expanded="false">Liste des Modules</a></li>
+                    {%endif%}
+                    <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
                 </ul>
             </li>
             <li class="nav-label">Pages</li>

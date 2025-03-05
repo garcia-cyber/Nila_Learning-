@@ -35,9 +35,9 @@ def login():
         user = request.form['user']
         pwd  = request.form['pwd'] 
 
-        with sqlite3.connect("courses.db") as con :
+        with sqlite3.connect("nila.db") as con :
             cur = con.cursor()
-            cur.execute("select * from users where fullNames = ? or phoneUser = ?  and passwordUser = ?", [user,user,pwd])
+            cur.execute("select * from users where fullNames = ?  and passwordUser = ?", [user,pwd])
             data = cur.fetchone()
 
             if data:
@@ -81,13 +81,13 @@ def register():
         user = request.form['user']
         post = request.form['postnom']  
         phone= request.form['phone']
-        role = 'professeur'
+        role = 'formateur'
         pwd  = request.form['pwd']
         pwd2 = request.form['pwd2'] 
 
         # verification du double mot de passe 
         if pwd == pwd2:
-            with sqlite3.connect("courses.db") as con :
+            with sqlite3.connect("nila.db") as con :
                 cur = con.cursor()
                 cur.execute("insert into users(fullNames,passwordUser,phoneUser,postNom, fuctionUser) values(?,?,?,?,?)",[user,pwd,phone,post,role])
                 con.commit()
@@ -108,7 +108,7 @@ def addP():
         confirmpassword = request.form['valconfirmpassword'] 
 
         if valpassword == confirmpassword:
-            with sqlite3.connect("courses.db") as con :
+            with sqlite3.connect("nila.db") as con :
                 cur = con.cursor()
                 cur.execute("insert into users(fullNames,phoneUser,postNom,fuctionUser,passwordUser) values(?,?,?,?,?)", [name,phone,fis,'professeur',valpassword])
                 con.commit()
@@ -130,13 +130,13 @@ def user():
         user = request.form['user']
         post = request.form['postnom']  
         phone= request.form['phone']
-        role = 'student'
+        role = 'apprenant'
         pwd  = request.form['pwd']
         pwd2 = request.form['pwd2'] 
 
         # verification du double mot de passe 
         if pwd == pwd2:
-            with sqlite3.connect("courses.db") as con :
+            with sqlite3.connect("nila.db") as con :
                 cur = con.cursor()
                 cur.execute("insert into users(fullNames,passwordUser,phoneUser,postNom, fuctionUser) values(?,?,?,?,?)",[user,pwd,phone,post,role])
                 con.commit()
@@ -145,7 +145,55 @@ def user():
             flash("les mot de passe doivent etre identique")
     return render_template('back/blank.html')
 
+#
+#
+# messagerie
+#
+#
+@app.route('/message', methods = ['GET','POST']) 
+def message():
+    if 'okey' in session:
+        return render_template('back/email-inbox.html') 
 
+#
+#
+# Module 
+@app.route('/module', methods = ['GET','POST'] )
+def module():
+    if 'okey' in session:
+        if request.method == 'POST':
+            module = request.form['module']
 
+            #verification si le module existe deja 
+            with sqlite3.connect("nila.db") as con :
+                ver = con.cursor()
+                ver.execute("select * from modules  where libelleModule = ? ",[module])
+                dataV = ver.fetchone()
+                
+                if dataV :
+                    flash("le module existe deja dans la base de donnee")
+                else :
+                    cur = con.cursor()
+                    cur.execute("insert into modules(libelleModule) values(?)",[module]) 
+                    con.commit()
+                    cur.close()
+                    flash(f" {module} a etes ajouter avec succes")  
+        return render_template('back/form-step.html')
+
+    else:
+        return redirect('/login')
+#
+# liste de module 
+@app.route("/listM")
+def listM():
+    if 'okey' in session:
+        with sqlite3.connect("nila.db") as con :
+            cur = con.cursor()
+            cur.execute("select * from modules")
+            aff = cur.fetchall()
+
+        return render_template('back/table-datatable.html' , aff = aff) 
+    else:
+        return redirect('/login') 
 if __name__ == '__main__':
     app.run(debug= True)
