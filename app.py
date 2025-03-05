@@ -69,19 +69,19 @@ def admin():
 def deco():
     session.clear()
     
-    return redirect('/login')
+    return redirect('/')
 
 
 ##
 #
-# creation du compte 
+# creation du compte  professeur 
 @app.route("/register",methods = ['POST','GET']) 
 def register():
     if request.method == 'POST':
         user = request.form['user']
         post = request.form['postnom']  
         phone= request.form['phone']
-        role = request.form['role']
+        role = 'professeur'
         pwd  = request.form['pwd']
         pwd2 = request.form['pwd2'] 
 
@@ -120,6 +120,32 @@ def addP():
 
 
     return render_template('back/form-validation.html')
+
+##
+#
+# creation du compte  student
+@app.route("/user",methods = ['POST','GET']) 
+def user():
+    if request.method == 'POST':
+        user = request.form['user']
+        post = request.form['postnom']  
+        phone= request.form['phone']
+        role = 'student'
+        pwd  = request.form['pwd']
+        pwd2 = request.form['pwd2'] 
+
+        # verification du double mot de passe 
+        if pwd == pwd2:
+            with sqlite3.connect("courses.db") as con :
+                cur = con.cursor()
+                cur.execute("insert into users(fullNames,passwordUser,phoneUser,postNom, fuctionUser) values(?,?,?,?,?)",[user,pwd,phone,post,role])
+                con.commit()
+                return redirect('/login')
+        else:
+            flash("les mot de passe doivent etre identique")
+    return render_template('back/blank.html')
+
+
 
 if __name__ == '__main__':
     app.run(debug= True)
