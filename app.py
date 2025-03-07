@@ -191,7 +191,7 @@ def module():
         return redirect('/login')
 #
 # liste de module 
-@app.route("/listM")
+@app.route("/listM" , methods = ['POST','GET'])
 def listM():
     if 'okey' in session:
         with sqlite3.connect("nila.db") as con :
