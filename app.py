@@ -249,15 +249,15 @@ def red(idMessage):
     else:
         return redirect("/login")   
 
-@app.route('/composer' , methods = ['POST','GET'])
-def composer():
+@app.route('/ecrire' , methods = ['POST','GET'])
+def ecrire():
     if 'okey' in session:
+
+
+
         
 
-
-        
-
-        return render_template('back/email-compose.html' ,data = data)
+        return render_template('back/form-picker.html' )
 
          
     else:
