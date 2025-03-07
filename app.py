@@ -1,5 +1,6 @@
 from flask import Flask , render_template , redirect , session , request , flash
 import sqlite3 
+import os 
 
 
 
@@ -7,6 +8,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'Nyla_application'
+app.config['UPLOAD_DOCUMENT'] = 'static/documents'
 
 ##
 # home page d'accueil
@@ -147,13 +149,18 @@ def user():
 
 #
 #
-# messagerie
+# messagerie liste
 #
 #
 @app.route('/message', methods = ['GET','POST']) 
 def message():
     if 'okey' in session:
-        return render_template('back/email-inbox.html') 
+        with sqlite3.connect('nila.db') as con :
+            cur = con.cursor()
+            cur.execute("select * from messages") 
+            data = cur.fetchall()
+
+        return render_template('back/email-inbox.html', data = data) 
 
 #
 #
@@ -195,5 +202,51 @@ def listM():
         return render_template('back/table-datatable.html' , aff = aff) 
     else:
         return redirect('/login') 
+    
+#
+#
+# compose email-compose.html
+@app.route('/compose',methods = ['POST','GET'])
+def compose():
+    if 'okey' in session:
+        if request.method == 'POST' :
+            des = request.form['des']
+            exp = session['id'] 
+            sub = request.form['Subject'] 
+            tex = request.form['text'] 
+            doc = request.files['file']
+
+            file = os.path.join(app.config['UPLOAD_DOCUMENT'],doc.filename) 
+            doc.save(file) 
+
+            with sqlite3.connect("nila.db") as con :
+                cur = con.cursor()
+                cur.execute("insert into messages(expM,dexM,sujetM,message,document) values(?,?,?,?,?)",[exp,des,sub,tex,doc.filename])
+                con.commit()
+                flash("message expediee !!!")
+        with sqlite3.connect("nila.db") as con :
+            cur = con.cursor()
+            cur.execute("select * from users") 
+            data = cur.fetchall()
+
+        return render_template('back/email-compose.html' ,data = data) 
+    else:
+        return redirect('/login')
+    
+##
+# @
+# /email-read.html
+# 
+@app.route('/read/<string:idMessage>', methods = ['POST','GET'])
+def red(idMessage):
+    if 'okey' in session:
+        with sqlite3.connect("nila.db") as con:
+            cur = con.cursor()
+            cur.execute("select * from messages where idMessage = ?",[idMessage])  
+            data = cur.fetchone()
+
+        return render_template('back/email-read.html', data = data)  
+    else:
+        return redirect("/login")    
 if __name__ == '__main__':
     app.run(debug= True)

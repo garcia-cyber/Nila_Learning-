@@ -27,11 +27,27 @@ call.execute("""
 
 
 ## information par defaut 
-call.execute("insert into users(fullNames,fuctionUser,passwordUser,emailUser) values('nila','admin','nila' ,'nila@gmail.com')")
+#call.execute("insert into users(fullNames,fuctionUser,passwordUser,emailUser) values('nila','admin','nila' ,'nila@gmail.com')")
 
 # table module 
 call.execute("create table if not exists modules(idModule integer primary key autoincrement , libelleModule varchar(30))")
 
+#
+#creation de la table messages
+
+call.execute("""
+   create table if not exists messages(
+             idMessage integer primary key autoincrement ,
+             expM integer ,
+             dexM integer,
+             sujetM varchar(50),
+             message text , 
+             document text ,
+             dateM timestamp default current_timestamp ,
+             foreign key(expM) references users(idUser),
+             foreign key(dexM) references users(idUser)
+             )
+""")
 
 
 call.commit()
