@@ -249,8 +249,35 @@ def red(idMessage):
     else:
         return redirect("/login")   
 
-@app.route('/composer')
+@app.route('/composer' , methods = ['POST','GET'])
 def composer():
-    return 'composer' 
+    if 'okey' in session:
+        
+
+        if request.method == 'POST' :
+            des = request.form['des']
+            exp = session['id'] 
+            sub = request.form['Subject'] 
+            tex = request.form['text'] 
+            doc = request.files['file']
+
+            file = os.path.join(app.config['UPLOAD_DOCUMENT'],doc.filename) 
+            doc.save(file) 
+
+            with sqlite3.connect("nila.db") as con :
+                cur = con.cursor()
+                cur.execute("insert into messages(expM,dexM,sujetM,message,document) values(?,?,?,?,?)",[exp,des,sub,tex,doc.filename])
+                con.commit()
+                flash("message expediee !!!")
+        with sqlite3.connect("nila.db") as con :
+            cur = con.cursor()
+            cur.execute("select * from users") 
+            data = cur.fetchall()
+
+        return render_template('back/email-compose.html' ,data = data)
+
+         
+    else:
+        return redirect('/login')    
 if __name__ == '__main__':
     app.run(debug= True)
