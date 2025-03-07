@@ -247,6 +247,10 @@ def red(idMessage):
 
         return render_template('back/email-read.html', data = data)  
     else:
-        return redirect("/login")    
+        return redirect("/login")   
+
+@app.route('/composer')
+def composer():
+    return 'composer' 
 if __name__ == '__main__':
     app.run(debug= True)
